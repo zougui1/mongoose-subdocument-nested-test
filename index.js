@@ -18,16 +18,9 @@ mongoose.set('useCreateIndex', true);
 // creations of models
 
 const test1Schema = mongoose.Schema({
-  test2: {
-    type: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Test2'
-    }],
-    default: []
-  },
-  test3: {
+  something: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Test3'
+    ref: 'Test2'
   }
 });
 
@@ -39,35 +32,23 @@ const test2Schema = mongoose.Schema({
 
 const Test2 = mongoose.model('Test2', test2Schema);
 
-const test3Schema = mongoose.Schema({
-  name: String
-});
-
-const Test3 = mongoose.model('Test3', test3Schema);
-
-const test2Name = 'my super name';
-const test3Name = 'another name';
+const name = 'name';
 
 // create documents in the DB
 // uncomment if your database is empty
 /*(async () => {
 
   const test2 = await new Test2({
-    name: test2Name
-  }).save();
-
-  const test3 = await new Test3({
-    name: test3Name
+    name: name
   }).save();
 
   const test1 = await new Test1({
-    test2: [test2._id],
-    test3: test3._id,
+    something: test2._id,
   }).save();
 })();*/
 
 // queries
 (async () => {
-  const test1s = await Test1.findOne({ 'test3.name': test3Name }).populate('test3');
+  const test1s = await Test1.findOne({ 'something.name': name }).populate('something');
   console.log(test1s);
 })();
