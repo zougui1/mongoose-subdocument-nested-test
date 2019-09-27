@@ -68,7 +68,6 @@ const test3Name = 'another name';
 
 // queries
 (async () => {
-
   const test1s = await Test1.findOne({ 'test3.name': test3Name }).populate('test3');
   console.log(test1s);
 })();
