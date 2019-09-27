@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // define a connection string to a mongoDB database
-const mongoURI = 'mongodb+srv://zougui:super_admin91@cluster0-hhrrd.mongodb.net/test?retryWrites=true&w=majority';
+const mongoURI = '';
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB starting'))
