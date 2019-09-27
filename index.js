@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // define a connection string to a mongoDB database
-const mongoURI = '';
+const mongoURI = 'mongodb+srv://zougui:super_admin91@cluster0-hhrrd.mongodb.net/test?retryWrites=true&w=majority';
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB starting'))
@@ -48,7 +48,15 @@ const name = 'name';
 })();*/
 
 // queries
+// won't retrieve any document from Test1
 (async () => {
-  const test1s = await Test1.findOne({ 'something.name': name }).populate('something');
-  console.log(test1s);
+  const test1 = await Test1.findOne({ 'something.name': name }).populate('something');
+  console.log('1 query:', test1);
+})();
+
+// will retrieve one document from Test1
+(async () => {
+  const test2 = await Test2.findOne({ name: name });
+  const test1 = await Test1.findOne({ something: test2._id }).populate('something');
+  console.log('2 queries:', test1);
 })();
